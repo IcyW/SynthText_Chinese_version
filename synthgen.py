@@ -12,15 +12,18 @@ import h5py
 from PIL import Image
 import numpy as np
 # import mayavi.mlab as mym
-import matplotlib.pyplot as plt
 import os.path as osp
 import scipy.ndimage as sim
 import scipy.spatial.distance as ssd
 import synth_utils as su
 import text_utils as tu
+import traceback, itertools
 from colorize3_poisson import Colorize
 from common import *
-import traceback, itertools
+import matplotlib
+# matplotlib.use("macOSX")
+import matplotlib.pyplot as plt
+matplotlib.use("TKAgg")
 
 
 class TextRegions(object):
@@ -217,7 +220,7 @@ def get_text_placement_mask(xyz, mask, plane, pad=2, viz=False):
     REGION : DICT output of TextRegions.get_regions
     PAD : number of pixels to pad the placement-mask by
     """
-    contour, hier = cv2.findContours(mask.copy().astype('uint8'),
+    binary, contour, hier = cv2.findContours(mask.copy().astype('uint8'),
                                      mode=cv2.RETR_CCOMP,
                                      method=cv2.CHAIN_APPROX_SIMPLE)
     contour = [np.squeeze(c).astype('float') for c in contour]
@@ -262,7 +265,7 @@ def get_text_placement_mask(xyz, mask, plane, pad=2, viz=False):
 
     pts_fp_i32 = [(pts_fp[i] + minxy[None, :]).astype('int32') for i in xrange(len(pts_fp))]
     cv2.drawContours(place_mask, pts_fp_i32, -1, 0,
-                     thickness=cv2.cv.CV_FILLED,
+                     thickness=cv2.FILLED,
                      lineType=8, hierarchy=hier)
 
     if not TextRegions.filter_rectified((~place_mask).astype('float') / 255):
