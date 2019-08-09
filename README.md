@@ -41,10 +41,10 @@ The library is written in Python. The main dependencies are:
 pygame, opencv (cv2), PIL (Image), numpy, matplotlib, h5py, scipy
 ```
 
-### Generating samples
+### Generating samples (in MacOS)
 
 ```
-python gen.py --viz
+pythonw gen.py --viz
 ```
 
 This will download a data file (~56M) to the `data` directory. This data file includes:
