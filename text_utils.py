@@ -7,10 +7,8 @@ import cv2
 import cPickle as cp
 import scipy.signal as ssig
 import scipy.stats as sstat
-from pip._internal import main as pipmain
-package = 'wget'
-pipmain(['install', package])
 import pygame
+import pygame.locals
 from pygame import freetype
 from PIL import Image
 import math
