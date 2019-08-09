@@ -33,7 +33,9 @@ DATA_PATH = 'data'
 DB_FNAME = osp.join(DATA_PATH, 'dset.h5')
 # url of the data (google-drive public file):
 DATA_URL = 'http://www.robots.ox.ac.uk/~ankush/data.tar.gz'
-OUT_FILE = 'results/SynthText_cartoon_viz.h5'
+
+RESULT_DIR = 'results'
+OUT_FILE = os.path.join(RESULT_DIR, 'SynthText_cartoon_viz.h5')
 
 
 def get_data():
@@ -116,6 +118,9 @@ def main(viz=False):
     print colorize(Color.BLUE, 'getting data..', bold=True)
     db = get_data()
     print colorize(Color.BLUE, '\t-> done', bold=True)
+
+    if not os.path.exists(RESULT_DIR):
+        os.mkdir(RESULT_DIR)
 
     # open the output h5 file:
     out_db = h5py.File(OUT_FILE, 'w')

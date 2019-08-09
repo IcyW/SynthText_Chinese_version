@@ -9,10 +9,12 @@ from __future__ import division
 import os
 import os.path as osp
 import numpy as np
-import matplotlib.pyplot as plt
 import h5py
 from common import *
-
+import matplotlib
+import matplotlib.pyplot as plt
+# matplotlib.use("TKAgg")
+matplotlib.use("macOSX")
 
 def viz_textbb(text_im, charBB_list, wordBB, alpha=1.0):
     """
@@ -74,4 +76,4 @@ def main(db_fname):
 if __name__ == '__main__':
     # main('results/SynthText_8000.h5')
     main('results/SynthText_cartoon_viz.h5')
-    main('results/SynthText.h5')
+    # main('results/SynthText.h5')
